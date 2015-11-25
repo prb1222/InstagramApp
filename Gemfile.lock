@@ -40,6 +40,11 @@ GEM
     autoprefixer-rails (5.2.1.2)
       execjs
       json
+    backbone-on-rails (1.2.0.0)
+      eco
+      ejs
+      jquery-rails
+      railties
     better_errors (2.1.1)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
@@ -60,6 +65,12 @@ GEM
       execjs
     coffee-script-source (1.10.0)
     debug_inspector (0.0.2)
+    eco (1.0.0)
+      coffee-script
+      eco-source
+      execjs
+    eco-source (1.1.0.rc.1)
+    ejs (1.1.1)
     erubis (2.7.0)
     execjs (2.6.0)
     globalid (0.3.6)
@@ -159,6 +170,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  backbone-on-rails
   better_errors
   binding_of_caller
   bootstrap-sass
