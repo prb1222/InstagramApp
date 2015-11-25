@@ -25,7 +25,7 @@ gem 'backbone-on-rails'
 gem 'bootstrap-sass'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-
+gem 'annotate'
 # Use Unicorn as the app server
 # gem 'unicorn'
 
