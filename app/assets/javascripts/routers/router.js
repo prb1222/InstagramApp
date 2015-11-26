@@ -9,7 +9,7 @@ InstagramApp.Routers.Router = Backbone.Router.extend({
 
   indexView: function () {
     var postsCollection = new InstagramApp.Collections.Posts();
-    var view = new InstagramApp.Views.IndexView({collection: postsCollection});
+    var view = new InstagramApp.Views.PostsIndex({collection: postsCollection});
     this.swapView(view);
   },
 

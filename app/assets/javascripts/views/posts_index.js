@@ -9,7 +9,7 @@ InstagramApp.Views.PostsIndex = Backbone.CompositeView.extend({
   },
 
   render: function () {
-    this.$el.html(this.template());
+    this.$el.html(this.template({posts: this.collection}));
     this.attachSubviews();
     return this;
   },
