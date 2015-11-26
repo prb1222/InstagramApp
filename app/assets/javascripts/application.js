@@ -17,6 +17,7 @@
 //= require backbone
 //= require instagram_app
 //= require_tree ../templates
+//= require_tree ./util
 //= require_tree ./models
 //= require_tree ./collections
 //= require_tree ./views

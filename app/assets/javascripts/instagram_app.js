@@ -4,10 +4,7 @@ window.InstagramApp = {
   Views: {},
   Routers: {},
   initialize: function() {
-    alert('Hello from Backbone!');
+    var router = new InstagramApp.Routers.Router({$rootEl: $('div#content')});
+    Backbone.history.start();
   }
 };
-
-$(document).ready(function(){
-  InstagramApp.initialize();
-});
