@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
   root to: 'staticpages#root'
   namespace :api, defaults: {format: :json} do
-     resources :posts, only: [:index]
+     resources :posts, only: [:index, :create]
   end
-
-  resources :posts, only: [:create]
 end
