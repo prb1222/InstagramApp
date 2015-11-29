@@ -5,6 +5,10 @@
   <h4>Find Posts</h4>
   <ul class="errors"></ul>
 
+  <div class="posts-to-display">
+    <span>10</span><span class="active">20</span><span>50</span>
+  </div>
+
   <div class="form-group">
     <label for="title-field">Tag</label><br>
     <input id="title-field" type="text" name="post[tag]">
@@ -22,7 +26,7 @@
 
   <input type="submit" class="btn btn-default" value="Submit">
 </form>
-
+<input type="submit" class="btn btn-default" value="Load More">
 <ul class="posts-index"></ul>
 <% if(!posts.length) { %>
   <p class="no-events">No posts to show.</p>
