@@ -16,6 +16,7 @@
 //= require underscore
 //= require backbone
 //= require instagram_app
+//= require ./util/backgrid.js
 //= require_tree ../templates
 //= require_tree ./util
 //= require_tree ./models
