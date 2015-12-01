@@ -46,22 +46,14 @@ InstagramApp.Views.PostsIndex = Backbone.CompositeView.extend({
       collection: this.collection
     });
 
-    // this.addSubview('#paginator', paginator);
-    // this.addSubview('.posts-index', grid);
   },
 
   render: function () {
     this.$el.html(this.template({posts: this.collection}));
     $('.posts-index').html(this.paginator.render().el);
     $('#paginator').html(this.grid.render().el);
-    // this.attachSubviews();
     return this;
   },
-
-  // addPostSubview: function (post) {
-  //   var subView = new InstagramApp.Views.PostItem({model: post});
-  //   this.addSubview('ul.posts-index', subView);
-  // },
 
   findPosts: function (event) {
     event.preventDefault();
@@ -72,10 +64,8 @@ InstagramApp.Views.PostsIndex = Backbone.CompositeView.extend({
     this.collection.fetch({
       data: {tag: tag, start: startDate, end: endDate},
       success: function (collection, response, options) {
-        // this.render();
       }.bind(this),
       error: function () {},
-      // reset: true
     });
   }
 });
