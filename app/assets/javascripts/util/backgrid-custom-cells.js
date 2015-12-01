@@ -56,9 +56,7 @@ Backgrid.ContentCell = Backgrid.Cell.extend({
 
   render: function () {
     this.$el.empty();
-    var rawValue = this.model.get(this.column.get("name"));
-    var formattedValue = this.formatter.fromRaw(rawValue, this.model);
-    this.$el.html(this.template({post: formattedValue}));
+    this.$el.html(this.template({post: this.model }));
     this.delegateEvents();
     return this;
   },

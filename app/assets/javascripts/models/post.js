@@ -9,6 +9,11 @@ InstagramApp.Models.Post = Backbone.Model.extend({
       delete response.id;
     }
 
+    if (response.user) {
+      this.set({username: response.user.username});
+      delete response.user;
+    }
+
     if (response.caption) {
       this.set({caption: response.caption.text})
       delete response.caption;
