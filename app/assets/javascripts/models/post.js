@@ -4,10 +4,8 @@ InstagramApp.Models.Post = Backbone.Model.extend({
   collection: InstagramApp.Collections.Posts,
 
   parse: function (response) {
-    if (response.id) {
-      this.set({id: parseInt(response.id)});
-      delete response.id;
-    }
+    debugger;
+    delete response.id
 
     if (response.user) {
       this.set({username: response.user.username});
@@ -15,7 +13,7 @@ InstagramApp.Models.Post = Backbone.Model.extend({
     }
 
     if (response.caption) {
-      this.set({caption: response.caption.text})
+      this.set({caption: response.caption.text || response.caption})
       delete response.caption;
     }
 
@@ -41,6 +39,8 @@ InstagramApp.Models.Post = Backbone.Model.extend({
       this.set({link: response.link});
       delete response.link;
     }
+
+    this.set({selected: false});
 
     return response;
   }

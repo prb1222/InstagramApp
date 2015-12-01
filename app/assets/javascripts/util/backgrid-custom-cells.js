@@ -37,9 +37,6 @@ Backgrid.MediaCell = Backgrid.Cell.extend({
   },
 
   generateVideoTag: function (source) {
-    // return '<video width="'+ this.model.get('mediaW') +'" height="' + this.model.get('mediaH') +'" controls>' +
-    //     '<source src="' + source + '" type="video/mp4"></source>' +
-    // '</video>';
     return '<video width="320" height="320" controls>' +
         '<source src="' + source + '" type="video/mp4"></source>' +
     '</video>';
@@ -57,9 +54,10 @@ Backgrid.ContentCell = Backgrid.Cell.extend({
 
   initialize: function (options) {
     Backgrid.ContentCell.__super__.initialize.apply(this, arguments);
+    this.listenTo(this.model, "sync", this.render);
     this.title = options.title || this.title;
     this.target = options.target || this.target;
-    this.selected = false;
+    this.selected = this.model.get('selected');
   },
 
   render: function () {
@@ -68,13 +66,22 @@ Backgrid.ContentCell = Backgrid.Cell.extend({
     if (this.selected) {
       this.$el.find('.save-button').addClass('selected');
     }
+
+    if (this.model.get('saved')) {
+      var $button = this.$el.find('.save-button')
+                            .removeClass('selected')
+                            .addClass('saved')
+                            .text("Saved");
+    }
     this.delegateEvents();
     return this;
   },
 
   toggleSave: function (event) {
     event.preventDefault();
+    if (this.model.get('saved')) {return;}
     this.selected = !this.selected;
+    this.model.set({selected: this.selected});
     this.render();
   }
 

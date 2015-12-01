@@ -106,5 +106,11 @@ td.content-cell {
     transition: all 300ms linear 0s;
   }
 
+  .saved {
+    background-color: #d9534f;
+  }
 
+  .saved:hover {
+    cursor: default !important;
+  }
 }

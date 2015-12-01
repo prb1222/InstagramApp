@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151125070038) do
+ActiveRecord::Schema.define(version: 20151201192606) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,7 +29,6 @@ ActiveRecord::Schema.define(version: 20151125070038) do
   create_table "posts", force: :cascade do |t|
     t.string   "caption",      null: false
     t.integer  "created_time", null: false
-    t.string   "thumbnail",    null: false #delete
     t.string   "image",        null: false
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
@@ -45,11 +44,9 @@ ActiveRecord::Schema.define(version: 20151125070038) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "username",    null: false
-    t.string   "full_name",   null: false #delete
-    t.string   "profile_pic", null: false #delete
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.string   "username",   null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

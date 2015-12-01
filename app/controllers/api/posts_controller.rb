@@ -4,9 +4,15 @@ class Api::PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(post_params)
+    @user = User.find_by(username: params[:username]) || User.create(username: params[:username])
+    @tag = Tag.find_by(title: params[:tag]) || Tag.create(title: params[:tag])
+    @post = Post.new(caption: params[:caption],
+                     created_time: params[:unixTime],
+                     image: params[:media],
+                     user_id: @user.id)
 
     if @post.save
+      PostTagging.create(post_id: @post.id, tag_id: @tag.id)
       render json: @post
     else
       render json: @post.errors.full_messages, status: 422
@@ -16,7 +22,7 @@ class Api::PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:caption, :created_time, :image, :thumbnail, :user_id)
+    params.require(:post).permit(:caption, :created_time, :media, :user_id)
   end
 
   def collect_results(next_post_url = nil)

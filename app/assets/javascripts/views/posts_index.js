@@ -5,7 +5,8 @@ InstagramApp.Views.PostsIndex = Backbone.CompositeView.extend({
 
   events: {
     "submit form.post-form-fields":"findPosts",
-    "click .load-more":"loadMore"
+    "click .load-more":"loadMore",
+    "click .save-posts":"savePosts"
   },
 
   initialize: function () {
@@ -89,10 +90,22 @@ InstagramApp.Views.PostsIndex = Backbone.CompositeView.extend({
         this.collection.add(collection.fullCollection.models.slice(0,40));
         var allModels = this.collection.fullCollection.models;
         allModels.sort(function(model1, model2){ return model2.get('unixTime') - model1.get('unixTime')})
-        var attributes = {tag: this.colle}
         this.collection = new InstagramApp.Collections.Posts(allModels);
         this.collection.searchParams = data;
       }.bind(this)
     });
+  },
+
+  savePosts: function (event) {
+    event.preventDefault();
+    var models = this.collection.fullCollection.select(function(model){ return model.get('selected') });
+    models.forEach(function (model) {
+      model.set({tag: this.collection.searchParams.tag});
+      model.save({},{
+        success: function (model, response, options) {
+          model.set({saved: true})
+        }
+      });
+    }.bind(this))
   }
 });
