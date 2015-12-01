@@ -51,17 +51,31 @@ Backgrid.ContentCell = Backgrid.Cell.extend({
 
   className: 'content-cell',
 
+  events: {
+    "click .save-button": "toggleSave"
+  },
+
   initialize: function (options) {
     Backgrid.ContentCell.__super__.initialize.apply(this, arguments);
     this.title = options.title || this.title;
     this.target = options.target || this.target;
+    this.selected = false;
   },
 
   render: function () {
     this.$el.empty();
     this.$el.html(this.template({post: this.model }));
+    if (this.selected) {
+      this.$el.find('.save-button').addClass('selected');
+    }
     this.delegateEvents();
     return this;
   },
+
+  toggleSave: function (event) {
+    event.preventDefault();
+    this.selected = !this.selected;
+    this.render();
+  }
 
 });

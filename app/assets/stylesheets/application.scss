@@ -53,6 +53,7 @@ td.content-cell {
   white-space: normal;
   line-height: normal;
   padding-left: 30px;
+  position: relative;
 
   .post-username {
     color: #93c54b;
@@ -77,4 +78,33 @@ td.content-cell {
     font-size: 15px;
     vertical-align: text-bottom;
   }
+
+  .save-button {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    padding: 10px;
+    font-size: 15px;
+    background-color: #93c54b;
+    border-radius: 5px;
+    color: #eee;
+    -webkit-transition: all 300ms linear 0s;
+    -moz-transition: all 300ms linear 0s;
+    -o-transition: all 300ms linear 0s;
+    transition: all 300ms linear 0s;
+  }
+
+  .save-button:hover {
+    cursor: pointer;
+  }
+
+  .selected {
+    background-color: #f47c3c;
+    -webkit-transition: all 300ms linear 0s;
+    -moz-transition: all 300ms linear 0s;
+    -o-transition: all 300ms linear 0s;
+    transition: all 300ms linear 0s;
+  }
+
+
 }
