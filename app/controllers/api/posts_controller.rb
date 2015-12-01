@@ -19,10 +19,12 @@ class Api::PostsController < ApplicationController
     params.require(:post).permit(:caption, :created_time, :image, :thumbnail, :user_id)
   end
 
-  def collect_results
+  def collect_results(next_post_url = nil)
     results = []
     start_time = params[:start].to_time
     end_time = params[:end].to_time
+    tag = params[:tag]
+    next_post_url = params[:next_post_url]
 
     if start_time > Time.now
       return []
@@ -34,11 +36,16 @@ class Api::PostsController < ApplicationController
       end_time = start_time + 23.hours + 59.minutes + 59.seconds
     end
 
-    response = JSON.load(open("https://api.instagram.com/v1/tags/#{params[:tag]}/media/recent?access_token=2291156452.1677ed0.6a0c183f935440b3b2b209b9590b06be"))
+    if next_post_url.nil?
+      response = JSON.load(open("https://api.instagram.com/v1/tags/#{tag}/media/recent?access_token=2291156452.1677ed0.6a0c183f935440b3b2b209b9590b06be"))
+    else
+      response = JSON.load(open(next_post_url))
+    end
+
     posts = response["data"]
 
     return [] if posts.empty?
-    
+
     last_time = Time.at(posts.last["created_time"].to_i)
 
     p "PAGINATING TO ENDPOINT"
@@ -81,7 +88,7 @@ class Api::PostsController < ApplicationController
       end
     end
 
-    return {next_post_url: next_post_url, posts: results}
+    return [{next_post_url: next_post_url, tag: tag, start: start_time, end: end_time}, results]
   end
 
   def reformat_url(url_root, str)

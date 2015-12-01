@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 20151125070038) do
   create_table "posts", force: :cascade do |t|
     t.string   "caption",      null: false
     t.integer  "created_time", null: false
-    t.string   "thumbnail",    null: false
+    t.string   "thumbnail",    null: false #delete
     t.string   "image",        null: false
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
@@ -46,8 +46,8 @@ ActiveRecord::Schema.define(version: 20151125070038) do
 
   create_table "users", force: :cascade do |t|
     t.string   "username",    null: false
-    t.string   "full_name",   null: false
-    t.string   "profile_pic", null: false
+    t.string   "full_name",   null: false #delete
+    t.string   "profile_pic", null: false #delete
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end

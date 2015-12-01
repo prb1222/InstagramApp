@@ -10,14 +10,26 @@ InstagramApp.Collections.Posts = Backbone.PageableCollection.extend({
   mode: 'client',
 
   comparator: function (model) {
-    return -parseInt(moment(model.get('unix_time')).format('x'));
+    return -parseInt(model.get('unixTime'));
   },
 
-  parse: function (response) {
-    if (response.next_post_url) {
-      this.next_post_url = response.next_post_url;
-      delete response.next_post_url;
+  parseRecords: function (response) {
+    var data = response[0]
+    if (data.next_post_url) {
+      this.next_post_url = data.next_post_url;
     }
-    return response.posts;
+
+    if (data.tag) {
+      this.tag = data.tag;
+    }
+
+    if (data.start) {
+      this.start = data.start;
+    }
+
+    if (data.end) {
+      this.end = data.end;
+    }
+    return response[1];
   }
 });
