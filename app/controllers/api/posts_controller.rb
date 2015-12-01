@@ -27,9 +27,13 @@ class Api::PostsController < ApplicationController
 
   def collect_results(next_post_url = nil)
     results = []
+    unless params[:start] || params[:tag]
+      return []
+    end
+
     start_time = params[:start].to_time
-    end_time = params[:end].to_time
     tag = params[:tag]
+    end_time = params[:end] ? params[:end].to_time : Time.now.change(hour: 0, minute: 0, second: 0)
     next_post_url = params[:next_post_url]
 
     if start_time > Time.now
