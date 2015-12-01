@@ -82,6 +82,6 @@ class Api::PostsController < ApplicationController
   end
 
   def reformat_url(url_root, str)
-    url_root[-19..-1] + str[0..19]
+    url_root[0...-19] + str[0...19]
   end
 end
