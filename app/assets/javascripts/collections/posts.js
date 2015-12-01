@@ -14,22 +14,8 @@ InstagramApp.Collections.Posts = Backbone.PageableCollection.extend({
   },
 
   parseRecords: function (response) {
-    var data = response[0]
-    if (data.next_post_url) {
-      this.next_post_url = data.next_post_url;
-    }
+    this.searchParams = response[0];
 
-    if (data.tag) {
-      this.tag = data.tag;
-    }
-
-    if (data.start) {
-      this.start = data.start;
-    }
-
-    if (data.end) {
-      this.end = data.end;
-    }
     return response[1];
   }
 });

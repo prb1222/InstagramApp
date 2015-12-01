@@ -80,20 +80,18 @@ InstagramApp.Views.PostsIndex = Backbone.CompositeView.extend({
   loadMore: function (event) {
     event.preventDefault();
     var collection = new InstagramApp.Collections.Posts();
+    var data = this.collection.searchParams;
     collection.fetch({
-      data: {
-        tag: this.collection.tag,
-        start: this.collection.start,
-        end: this.collection.end,
-        next_post_url: this.collection.next_post_url
-      },
+      data: data,
       remove: false,
       merge: false,
       success: function (collection, response, options) {
         this.collection.add(collection.fullCollection.models.slice(0,40));
         var allModels = this.collection.fullCollection.models;
         allModels.sort(function(model1, model2){ return model2.get('unixTime') - model1.get('unixTime')})
+        var attributes = {tag: this.colle}
         this.collection = new InstagramApp.Collections.Posts(allModels);
+        this.collection.searchParams = data;
       }.bind(this)
     });
   }
