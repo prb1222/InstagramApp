@@ -37,7 +37,10 @@ Backgrid.MediaCell = Backgrid.Cell.extend({
   },
 
   generateVideoTag: function (source) {
-    return '<video width="'+ this.model.get('mediaW') +'" height="' + this.model.get('mediaH') +'" controls>' +
+    // return '<video width="'+ this.model.get('mediaW') +'" height="' + this.model.get('mediaH') +'" controls>' +
+    //     '<source src="' + source + '" type="video/mp4"></source>' +
+    // '</video>';
+    return '<video width="320" height="320" controls>' +
         '<source src="' + source + '" type="video/mp4"></source>' +
     '</video>';
   }

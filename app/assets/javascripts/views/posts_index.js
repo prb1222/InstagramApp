@@ -18,7 +18,7 @@ InstagramApp.Views.PostsIndex = Backbone.CompositeView.extend({
         editable: false
       }, {
         name: "caption",
-        label: "Caption",
+        label: "Post Info",
         cell: "content", // This is converted to "ContentCell" and a corresponding class in the Backgrid package namespace is looked up
         editable: false
       }
