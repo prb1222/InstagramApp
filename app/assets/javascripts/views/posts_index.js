@@ -69,9 +69,11 @@ InstagramApp.Views.PostsIndex = Backbone.CompositeView.extend({
 
     if (exit) {return;}
 
+    $('.button-row').after('<i class="fa fa-spinner fa-spin"></i>')
     this.collection.fetch({
       data: {tag: tag, start: startDate, end: endDate},
       success: function (collection, response, options) {
+        this.$el.find('i.fa.fa-spinner').remove();
       }.bind(this),
       error: function () {},
       reset: true
@@ -80,8 +82,15 @@ InstagramApp.Views.PostsIndex = Backbone.CompositeView.extend({
 
   loadMore: function (event) {
     event.preventDefault();
+    var $errors = this.$el.find('ul.errors');
+    $errors.empty();
     var collection = new InstagramApp.Collections.Posts();
+    if (!this.collection.searchParams) {
+      $errors.append('<li>Must submit a search first!</li>');
+      return;
+    }
     var data = this.collection.searchParams;
+    $('.button-row').after('<i class="fa fa-spinner fa-spin"></i>')
     collection.fetch({
       data: data,
       remove: false,
@@ -92,6 +101,7 @@ InstagramApp.Views.PostsIndex = Backbone.CompositeView.extend({
         allModels.sort(function(model1, model2){ return model2.get('unixTime') - model1.get('unixTime')})
         this.collection = new InstagramApp.Collections.Posts(allModels);
         this.collection.searchParams = data;
+        this.$el.find('i.fa.fa-spinner').remove();
       }.bind(this)
     });
   },
