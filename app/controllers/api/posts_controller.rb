@@ -36,6 +36,9 @@ class Api::PostsController < ApplicationController
 
     response = JSON.load(open("https://api.instagram.com/v1/tags/#{params[:tag]}/media/recent?access_token=2291156452.1677ed0.6a0c183f935440b3b2b209b9590b06be"))
     posts = response["data"]
+
+    return [] if posts.empty?
+    
     last_time = Time.at(posts.last["created_time"].to_i)
 
     p "PAGINATING TO ENDPOINT"

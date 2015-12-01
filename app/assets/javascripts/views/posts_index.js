@@ -10,29 +10,17 @@ InstagramApp.Views.PostsIndex = Backbone.CompositeView.extend({
   initialize: function () {
     this.listenTo(this.collection, "sync", this.render);
 
-    var columns = [{
-        name: "id", // The key of the model attribute
-        label: "ID", // The name to display in the header
-        editable: false,
-        cell: Backgrid.IntegerCell.extend({
-          orderSeparator: ''
-        })
+    var columns = [
+      {
+        name: "media",
+        label: "Media",
+        cell: "media",
+        editable: false
       }, {
         name: "caption",
         label: "Caption",
-        cell: "string" // This is converted to "StringCell" and a corresponding class in the Backgrid package namespace is looked up
-      }, {
-        name: "thumbnail",
-        label: "Image URL",
-        cell: "string"
-      }, {
-        name: "created_time",
-        label: "Created At",
-        cell: "string"
-      }, {
-        name: "link",
-        label: "Instagram Link",
-        cell: "uri"
+        cell: "content", // This is converted to "ContentCell" and a corresponding class in the Backgrid package namespace is looked up
+        editable: false
       }
     ];
 
@@ -49,17 +37,36 @@ InstagramApp.Views.PostsIndex = Backbone.CompositeView.extend({
 
   render: function () {
     this.$el.html(this.template({posts: this.collection}));
-    $('.posts-index').html(this.paginator.render().el);
-    $('#paginator').html(this.grid.render().el);
+    if (this.collection.length) {
+      $('#paginator').html(this.paginator.render().el);
+      $('.posts-index').html(this.grid.render().el);
+    }
     return this;
   },
 
   findPosts: function (event) {
     event.preventDefault();
     var $form = $(event.currentTarget);
+
+    var $errors = $form.find('ul.errors');
+    $errors.empty();
+
     var tag = $form.find('#title-field').val();
     var startDate = $form.find('#start-date-field').val();
     var endDate = $form.find('#end-date-field').val();
+
+    if (tag === "") {
+      $errors.html('<li>Tag cannot be empty!</li>');
+      var exit = true;
+    }
+
+    if (startDate === "" || endDate === "") {
+      $errors.append('<li>Dates must be valid!</li>');
+      var exit = true;
+    }
+
+    if (exit) {return;}
+
     this.collection.fetch({
       data: {tag: tag, start: startDate, end: endDate},
       success: function (collection, response, options) {

@@ -15,8 +15,15 @@ InstagramApp.Models.Post = Backbone.Model.extend({
     }
 
     if (response.images) {
-      this.set({thumbnail: response.images.thumbnail.url});
+      var imageInfo = response.images.low_resolution;
+      this.set({media: imageInfo.url, mediaW: imageInfo.width, mediaH: imageInfo.height});
       delete response.images;
+    }
+
+    if (response.videos) {
+      var videoInfo = response.videos.low_resolution;
+      this.set({media: videoInfo.url, mediaW: videoInfo.width, mediaH: videoInfo.height});
+      delete response.videos;
     }
 
     if (response.created_time) {
