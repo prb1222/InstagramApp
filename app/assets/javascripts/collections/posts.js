@@ -4,10 +4,14 @@ InstagramApp.Collections.Posts = Backbone.PageableCollection.extend({
   model: InstagramApp.Models.Post,
 
   state: {
-    pageSize: 20
+    pageSize: 10
   },
 
   mode: 'client',
+
+  comparator: function (model) {
+    return -parseInt(moment(model.get('unix_time')).format('x'));
+  },
 
   parse: function (response) {
     if (response.next_post_url) {

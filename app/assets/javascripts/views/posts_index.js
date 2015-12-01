@@ -9,7 +9,7 @@ InstagramApp.Views.PostsIndex = Backbone.CompositeView.extend({
 
   initialize: function () {
     this.listenTo(this.collection, "sync", this.render);
-    this.listenTo(this.collection, "add", this.addPostSubview);
+    // this.listenTo(this.collection, "add", this.addPostSubview);
 
     var columns = [{
         name: "id", // The key of the model attribute
@@ -37,29 +37,31 @@ InstagramApp.Views.PostsIndex = Backbone.CompositeView.extend({
       }
     ];
 
-    var grid = new Backgrid.Grid({
+    this.grid = new Backgrid.Grid({
       columns: columns,
       collection: this.collection
     });
 
-    var paginator = new Backgrid.Extension.Paginator({
+    this.paginator = new Backgrid.Extension.Paginator({
       collection: this.collection
     });
 
-    this.addSubview('.posts-index', grid);
-    this.addSubview('#paginator', paginator);
+    // this.addSubview('#paginator', paginator);
+    // this.addSubview('.posts-index', grid);
   },
 
   render: function () {
     this.$el.html(this.template({posts: this.collection}));
-    this.attachSubviews();
+    $('.posts-index').html(this.paginator.render().el);
+    $('#paginator').html(this.grid.render().el);
+    // this.attachSubviews();
     return this;
   },
 
-  addPostSubview: function (post) {
-    var subView = new InstagramApp.Views.PostItem({model: post});
-    this.addSubview('ul.posts-index', subView);
-  },
+  // addPostSubview: function (post) {
+  //   var subView = new InstagramApp.Views.PostItem({model: post});
+  //   this.addSubview('ul.posts-index', subView);
+  // },
 
   findPosts: function (event) {
     event.preventDefault();
@@ -73,7 +75,7 @@ InstagramApp.Views.PostsIndex = Backbone.CompositeView.extend({
         // this.render();
       }.bind(this),
       error: function () {},
-      reset: true
+      // reset: true
     });
   }
 });

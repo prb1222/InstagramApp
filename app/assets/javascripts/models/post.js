@@ -20,6 +20,7 @@ InstagramApp.Models.Post = Backbone.Model.extend({
     }
 
     if (response.created_time) {
+      this.set({unixTime: parseInt(response.created_time)});
       this.set({created_time: moment.unix(parseInt(response.created_time)).format("MMM Do[,] YYYY [at] hh:mm a")});
       delete response.created_time;
     }
