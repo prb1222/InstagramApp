@@ -1,7 +1,7 @@
 # InstagramApp
 [Heroku link][heroku]
 
-InstagramApp is a simple, one-page web application which queries Instagram's recently tagged posts [API][instagram]. InstagramApp uses a Rails backend deplpyed on Heroku to respond to requests. The requests are in the form of a tag, an start date, and a end date. The rails server provides a bare-bones static page which initializes a Backbone app to provide a form for submission, query results, and save desired posts to the server. MomentJS is used to format dates, and Backgrid is used to display the posts along with a paginator. There is also a 'Load More' button which resends a tag, start date, end date, and the last post retrieved to gather more posts starting from the last retrieved post.
+InstagramApp is a simple, one-page web application which queries Instagram's recently tagged posts [API][instagram]. InstagramApp uses a Rails backend deployed on Heroku to respond to requests. The requests are in the form of a tag, an start date, and a end date. The rails server provides a bare-bones static page which initializes a Backbone app to provide a form for submission, query results, and save desired posts to the server. MomentJS is used to format dates, and Backgrid is used to display the posts along with a paginator. There is also a 'Load More' button which resends a tag, start date, end date, and the last post retrieved to gather more posts starting from the last retrieved post.
 
 [instagram]: https://instagram.com/developer/endpoints/tags/
 [heroku]: https://peterinstagramapp.herokuapp.com
